@@ -16,7 +16,7 @@ class Board:
     def create_board(self):
         for i in range(self.height):
             self.board.append([])
-            for j in range(self.width):
+            for _ in range(self.width):
                 self.board[i].append(Cell(CellsState.SEA))
         min_size = min(self.height, self.width)
         if min_size % 2 == 0:
@@ -38,7 +38,7 @@ class Board:
             y = random.randint(0, self.height - 1)
             direction = random.choice([(0, -1), (0, 1), (1, 0), (-1, 0)])
             ship_list = []
-            f = False
+            is_ship_cells_filled = False
             for i in range(self.max_ship):
                 if self.check_neighbors(x, y):
                     ship_list.append((x, y))
@@ -47,12 +47,12 @@ class Board:
                     x += direction[0]
                     y += direction[1]
                     if x >= self.width or x < 0 or y >= self.height or y < 0:
-                        f = True
+                        is_ship_cells_filled = True
                         break
                 else:
-                    f = True
+                    is_ship_cells_filled = True
                     break
-            if f:
+            if is_ship_cells_filled:
                 continue
             ship = Ship(ship_list, self.max_ship)
             self.count_ship += 1
