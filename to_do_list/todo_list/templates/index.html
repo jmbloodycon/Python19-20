@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+    <form action="/tasks" method="post">
+        <input type="text" name="new_task_description">
+        <input type="submit" value="add task"/></form>
+
+    <form action="/tasks">
+        <input type="submit" value="all" name="status"/>
+        <input type="submit" value="done" name="status"/>
+        <input type="submit" value="undone" name="status"/></form>
+
+  <ul type="circle">
+      {% for task in task_list %}
+        <form action="/tasks" method="post">
+            {% if not task.done %}
+                <input type="submit" value="mark done"/>
+                <input type="hidden" value="{{task.id}}" name="id_of_done_task"/>
+            {% endif %}
+            {{task.description}}</form>
+      {% endfor %}
+  </ul>
+
+</body>
+</html>
