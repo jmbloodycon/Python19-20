@@ -1,0 +1,4 @@
+import movies.api as api
+
+if __name__ == '__main__':
+    api.app.run()
